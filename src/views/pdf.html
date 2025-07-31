@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Uploader and Viewer</title>
+    <link rel="stylesheet" href="styles.css"> </head>
+<body>
+    <h1>Upload and View PDF</h1>
+
+    <div class="upload-section">
+        <input type="file" id="pdfFileInput" accept="application/pdf">
+        <button id="uploadButton">Upload PDF</button>
+    </div>
+
+    <hr>
+
+    <h2>Uploaded PDF Viewer</h2>
+    <div class="pdf-viewer">
+        <p id="noPdfMessage">No PDF uploaded yet, or select a PDF to view.</p>
+        <iframe id="pdfViewer" src="" frameborder="0" style="width:100%; height:600px; display:none;"></iframe>
+    </div>
+
+    <script src="../pdf.js"></script>
+ </body>
+</html>

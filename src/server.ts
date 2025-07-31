@@ -8,32 +8,33 @@ dotenv.config();
 
 const server = express();
 
+// Habilita CORS e JSON
 server.use(cors());
+server.use(express.json());
 
-server.use(express.static(path.join(__dirname, '../public')));
+// Servir frontend (HTML, JS, CSS) da pasta 'views'
+server.use(express.static(path.join(__dirname, 'views')));
 
-// Definir o formato das requisições
-server.use(express.json()); // Usando JSON
+// Servir arquivos enviados (PDFs)
+server.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
-// Definir as rotas da API
+// Rotas da API
 server.use(apiRoutes);
 
-// Endpoint para caso o usuário acesse um caminho inexistente
+// Rota fallback para caminhos inexistentes
 server.use((req: Request, res: Response) => {
     res.status(404).json({ error: 'Endpoint não encontrado.' });
 });
 
 // Middleware de erro
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
-    console.error(err); // Exibe o erro no console
+    console.error(err);
     res.status(400).json({ error: 'Ocorreu algum erro.' });
 };
 server.use(errorHandler);
 
-// Iniciar o servidor e exibir a porta no console
-const port = process.env.PORT || 3000; // Defina uma porta padrão se não estiver no .env
+// Iniciar o servidor
+const port = process.env.PORT || 3000;
 server.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
 });
-
-

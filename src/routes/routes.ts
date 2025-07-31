@@ -1,12 +1,11 @@
 import { Router } from 'express';
-
-import * as ApiController from '../controllers/apiController';
+import {uploadPdf, uploadPdfMiddleware} from '../controllers/apiController';
 
 const router = Router();
 
-router.get('/ping', ApiController.ping)
+// router.get('/ping', ApiController.ping);
 
-router
-
+// rota de upload
+router.post('/uploads', uploadPdfMiddleware, uploadPdf);
 
 export default router;
